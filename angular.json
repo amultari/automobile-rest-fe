@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "automobile-rest-fe"
+    }
+  },
+  "defaultProject": "automobile-rest-fe",
+  "cli": {
+    "analytics": "7b3be252-c6af-4045-a8ed-4b9f8c1ee94b"
+  }
 }
