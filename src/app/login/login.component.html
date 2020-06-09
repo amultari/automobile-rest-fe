@@ -1,14 +1,34 @@
+<div *ngIf="errorMessage" class="alert alert-danger alert-dismissible fade show" role="alert">
+    {{errorMessage}}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
 <div class="auth-wrapper">
     <form class="form-signin" (ngSubmit)="loginUser(loginForm)" #loginForm="ngForm" novalidate>
         <h3 class="h3 mb-3 font-weight-normal text-center">Please sign in</h3>
         <div class="form-group">
             <label>Username</label>
-            <input type="text"  [(ngModel)]="user.username" name="username" id="username"  class="form-control"  placeholder="Enter email" required>
+            <input type="text"  [(ngModel)]="user.username" #usernameVar="ngModel" name="username" id="username"  class="form-control"  
+            placeholder="Enter email" [ngClass]="{'is-invalid': (usernameVar.touched || usernameVar.dirty) && !usernameVar.valid }" 
+            required>
+            <span class="invalid-feedback">
+                <span *ngIf="usernameVar.errors?.required">
+                    Prego inserire un valore
+                </span>
+            </span>
         </div>
         <div class="form-group">
             <label>Password</label>
-            <input type="password" [(ngModel)]="user.password" name="password" id="password"  class="form-control"  placeholder="Password" required>
+            <input type="password" [(ngModel)]="user.password" #passwordVar="ngModel" name="password" id="password"  class="form-control"  
+            placeholder="Password" [ngClass]="{'is-invalid': (passwordVar.touched || passwordVar.dirty) && !passwordVar.valid }" 
+            required>
+            <span class="invalid-feedback">
+                <span *ngIf="passwordVar.errors?.required">
+                    Prego inserire un valore
+                </span>
+            </span>
         </div>
-        <button type="submit" class="btn btn-block btn-primary">Sign in</button>
+        <button type="submit" [disabled]="!loginForm.valid" class="btn btn-block btn-primary">Sign in</button>
     </form>
 </div> 

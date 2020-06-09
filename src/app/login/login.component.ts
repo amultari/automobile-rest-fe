@@ -10,7 +10,7 @@ import { User } from '../auth/user';
 })
 export class LoginComponent implements OnInit {
   errorMessage: string = '';
-  user:User = new User();
+  user: User = new User();
 
   constructor(private authService: AuthService) { }
 
@@ -18,7 +18,11 @@ export class LoginComponent implements OnInit {
   }
 
   loginUser(loginForm: NgForm) {
-    this.authService.signIn(this.user);
+    if (loginForm.valid) {
+      this.authService.signIn(this.user);
+    } else {
+      this.errorMessage = 'Attenzione! Operazione fallita! Il form non è stato validato'
+    }
   }
 
 }

@@ -1,26 +1,27 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { User } from './user';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService{
+export class AuthService {
 
   loginEndpoint: string = 'http://localhost:8080/public/login';
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   currentUser = {};
 
-  constructor(private http: HttpClient,private router: Router) {
+  constructor(private http: HttpClient, private router: Router) {
   }
 
-  private loggedInObs = new BehaviorSubject<boolean>(false); // {1}
+  //questo campo mi serve per tenere aggiornati navbar e footer, per farli apparire o meno
+  private loggedInSub = new BehaviorSubject<boolean>(false);
 
-  get isLoggedInObs() {
-    this.loggedInObs.next(this.isLoggedIn);
-    return this.loggedInObs.asObservable();
+  get isLoggedInSub(): Observable<boolean> {
+    this.loggedInSub.next(this.isLoggedIn);
+    return this.loggedInSub.asObservable();
   }
 
   // Sign-up
@@ -37,15 +38,14 @@ export class AuthService{
     // return this.http.post<any>(`${this.loginEndpoint}`, user)
     //   .subscribe((res: any) => {
     //     localStorage.setItem('access_token', res.token);
-    //     this.loggedInObs.next(this.isLoggedIn);
     //     // this.getUserProfile(res._id).subscribe((res) => {
     //     //   this.currentUser = res;
     //     //   this.router.navigate(['user-profile/' + res.msg._id]);
     //     // })
     //   });
-      localStorage.setItem('access_token','sdfsdfadfadf');
-      this.loggedInObs.next(this.isLoggedIn);
-      this.router.navigate(['' ]);
+    localStorage.setItem('access_token', 'sdfsdfadfadf');
+    this.loggedInSub.next(this.isLoggedIn);
+    this.router.navigate(['']);
   }
 
   getToken() {
@@ -59,10 +59,10 @@ export class AuthService{
 
   doLogout() {
     let removeToken = localStorage.removeItem('access_token');
+    this.loggedInSub.next(this.isLoggedIn);
     if (removeToken == null) {
       this.router.navigate(['log-in']);
     }
-    this.loggedInObs.next(this.isLoggedIn);
   }
 
   // // User profile

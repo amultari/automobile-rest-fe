@@ -14,6 +14,6 @@ export class FooterComponent implements OnInit {
   constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
-    this.isLoggedIn$ = this.authService.isLoggedInObs;
+    this.isLoggedIn$ = this.authService.isLoggedInSub;
   }
 }
