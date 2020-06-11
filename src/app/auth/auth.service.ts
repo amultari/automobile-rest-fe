@@ -35,17 +35,13 @@ export class AuthService {
 
   // Sign-in
   signIn(user: User) {
-    // return this.http.post<any>(`${this.loginEndpoint}`, user)
-    //   .subscribe((res: any) => {
-    //     localStorage.setItem('access_token', res.token);
-    //     // this.getUserProfile(res._id).subscribe((res) => {
-    //     //   this.currentUser = res;
-    //     //   this.router.navigate(['user-profile/' + res.msg._id]);
-    //     // })
-    //   });
-    localStorage.setItem('access_token', 'sdfsdfadfadf');
-    this.loggedInSub.next(this.isLoggedIn);
-    this.router.navigate(['']);
+    return this.http.post<any>(`${this.loginEndpoint}`, user)
+      .subscribe((res: any) => {
+        localStorage.setItem('access_token', res.accessToken);
+        this.currentUser = res;
+        this.loggedInSub.next(this.isLoggedIn);
+        this.router.navigate(['']);
+      });
   }
 
   getToken() {
