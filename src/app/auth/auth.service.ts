@@ -35,7 +35,7 @@ export class AuthService {
 
   // Sign-in
   signIn(user: User) {
-    return this.http.post<any>(`${this.loginEndpoint}`, user)
+    return this.http.post<any>(`${this.loginEndpoint}`, user, { headers: this.headers })
       .subscribe((res: any) => {
         localStorage.setItem('access_token', res.accessToken);
         this.currentUser = res;

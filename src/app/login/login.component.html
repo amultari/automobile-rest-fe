@@ -4,7 +4,8 @@
         <span aria-hidden="true">&times;</span>
     </button>
 </div>
-<div class="auth-wrapper">
+
+<div class="auth-wrapper" *ngIf="!(isLoggedIn$ | async); else elseBlock">
     <form class="form-signin" (ngSubmit)="loginUser(loginForm)" #loginForm="ngForm" novalidate>
         <h3 class="h3 mb-3 font-weight-normal text-center">Please sign in</h3>
         <div class="form-group">
@@ -32,3 +33,16 @@
         <button type="submit" [disabled]="!loginForm.valid" class="btn btn-block btn-primary">Sign in</button>
     </form>
 </div> 
+<ng-template #elseBlock>
+    <div class="container">
+        <div class='card'>
+            <div class='card-body mt-5'>
+    
+            <div class="alert alert-warning mt-3" role="alert">
+                L'accesso risulta effettuato. Si prega di effettuare il 'Logout' prima di effettuare
+                nuovamente l'accesso.
+            </div>
+        </div>
+        </div>
+    </div>
+</ng-template>
