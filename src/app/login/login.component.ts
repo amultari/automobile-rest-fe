@@ -3,6 +3,7 @@ import { AuthService } from '../auth/auth.service';
 import { NgForm } from '@angular/forms';
 import { User } from '../auth/user';
 import { Observable } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -17,10 +18,19 @@ export class LoginComponent implements OnInit {
   //loggato e tenti di accedere alla pagina di login
   isLoggedIn$: Observable<boolean>;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService,private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.isLoggedIn$ = this.authService.isLoggedInSub;
+
+
+    //verifico presenza messaggio nei query params
+    this.route
+      .queryParams
+      .subscribe(params => {
+        // se non è presente il confirmMessage non faccio nulla
+        this.errorMessage = params['statusHttpMessage'] ? params['statusHttpMessage'] : '';
+      });
   }
 
   loginUser(loginForm: NgForm) {
