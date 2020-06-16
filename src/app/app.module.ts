@@ -14,6 +14,8 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { AutomobileCreateComponent } from './automobile/automobile-create/automobile-create.component';
 import { AutomobileDetailComponent } from './automobile/automobile-detail/automobile-detail.component';
+import { AutomobileEditComponent } from './automobile/automobile-edit/automobile-edit.component';
+import { DatePipe } from '@angular/common';
 
 
 
@@ -27,7 +29,8 @@ import { AutomobileDetailComponent } from './automobile/automobile-detail/automo
     AutomobileSearchComponent,
     AutomobileSearchResultsComponent,
     AutomobileCreateComponent,
-    AutomobileDetailComponent
+    AutomobileDetailComponent,
+    AutomobileEditComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +43,8 @@ import { AutomobileDetailComponent } from './automobile/automobile-detail/automo
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,
     multi: true
-  }],
+  }, DatePipe
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

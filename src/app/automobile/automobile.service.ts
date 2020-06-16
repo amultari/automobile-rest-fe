@@ -44,17 +44,11 @@ export class AutomobileService {
       )
   }
 
-  // edit(idAutoreInput: number): Observable<Autore> {
-  //   return this.http.get<Autore>(this.apiServer + '/' + idAutoreInput.toString() + '/edit').pipe(
-  //     catchError(this.handleError)
-  //   );
-  // }
-
-  // update(autoreInput: Autore): Observable<Autore> {
-  //   return this.http.put<Autore>(this.apiServer + '/' + autoreInput.id.toString(), autoreInput, this.httpOptions).pipe(
-  //     catchError(this.handleError)
-  //   );
-  // }
+  update(automobileInput: Automobile): Observable<Automobile> {
+    return this.http.put<Automobile>(this.apiServer + '/' + automobileInput.id.toString(), automobileInput, this.httpOptions).pipe(
+      catchError(this.handleError)
+    );
+  }
 
   // delete(autoreInput: Autore): Observable<Autore> {
   //   return this.http.delete<Autore>(this.apiServer + '/' + autoreInput.id.toString(), this.httpOptions).pipe(
