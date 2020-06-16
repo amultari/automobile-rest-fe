@@ -30,7 +30,7 @@ export class AutomobileCreateComponent implements OnInit {
           console.log('inserito ' + JSON.stringify(automobileItem))
         },
         err => this.errorMessage = err,
-        //() => this.router.navigate([`/automobile/${this.automobile.id}`], { queryParams: { confirmMessage: 'Operazione effettuata correttamente.' } })
+        () => this.router.navigate([`/automobile/${this.automobile.id}`], { queryParams: { confirmMessage: 'Operazione effettuata correttamente.' } })
       );
     } else {
       this.errorMessage = 'Attenzione! Operazione fallita! Il form non è stato validato'

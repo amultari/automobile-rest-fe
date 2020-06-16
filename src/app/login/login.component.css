@@ -1,4 +1,6 @@
-html,body,.auth-wrapper{height:100%;}
+html,body,.auth-wrapper{
+    height:100%;
+}
 .auth-wrapper{
     display:-ms-flexbox;display:flex;-ms-flex-align:center;align-items:center;background-color:#f5f5f5;
     padding-top: 40px;
@@ -26,3 +28,7 @@ label{
 }
 .container{max-width:600px;}
 .inner-main{padding-top:130px;width:100%;}
+
+nav{
+    height: 55px;
+}

@@ -6,6 +6,7 @@ import { AutomobileCreateComponent } from './automobile/automobile-create/automo
 import { AutomobileSearchComponent } from './automobile/automobile-search/automobile-search.component';
 import { LoginComponent } from './login/login.component';
 import { WelcomeComponent } from './welcome/welcome.component';
+import { AutomobileDetailComponent } from './automobile/automobile-detail/automobile-detail.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'welcome', pathMatch: 'full', canActivate: [AuthGuard] },
@@ -13,8 +14,8 @@ const routes: Routes = [
   { path: 'log-in', component: LoginComponent },
   { path: 'automobile/search', component: AutomobileSearchComponent, canActivate: [AuthGuard]  },
   { path: 'automobile/create', component: AutomobileCreateComponent, canActivate: [AuthGuard]  },
+  { path: 'automobile/:id', component: AutomobileDetailComponent, canActivate: [AuthGuard] },
   { path: '**', redirectTo: 'welcome', pathMatch: 'full' },
-  // { path: 'automobile/:id', component: UserProfileComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({
