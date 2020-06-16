@@ -53,12 +53,12 @@ export class AutomobileService {
   //   );
   // }
 
-  // create(autoreInput: Autore): Observable<Autore> {
-  //   return this.http.post<Autore>(this.apiServer, JSON.stringify(autoreInput), this.httpOptions)
-  //     .pipe(
-  //       catchError(this.handleError)
-  //     )
-  // }
+  create(automobileInput: Automobile): Observable<Automobile> {
+    return this.http.post<Automobile>(this.apiServer, JSON.stringify(automobileInput), this.httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      )
+  }
 
   // edit(idAutoreInput: number): Observable<Autore> {
   //   return this.http.get<Autore>(this.apiServer + '/' + idAutoreInput.toString() + '/edit').pipe(

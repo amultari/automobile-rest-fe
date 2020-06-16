@@ -12,6 +12,7 @@ import { FooterComponent } from './footer/footer.component';
 import { LoginComponent } from './login/login.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { WelcomeComponent } from './welcome/welcome.component';
+import { AutomobileCreateComponent } from './automobile/automobile-create/automobile-create.component';
 
 
 
@@ -23,7 +24,8 @@ import { WelcomeComponent } from './welcome/welcome.component';
     NavbarComponent,
     LoginComponent,
     AutomobileSearchComponent,
-    AutomobileSearchResultsComponent
+    AutomobileSearchResultsComponent,
+    AutomobileCreateComponent
   ],
   imports: [
     BrowserModule,
