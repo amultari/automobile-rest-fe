@@ -1,0 +1,75 @@
+<div class="container">
+    <div *ngIf="errorMessage" class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{errorMessage}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+    <div class='card' *ngIf="selectedAutomobile">
+        <div class='card-header'>
+            Visualizza dettaglio
+        </div>
+
+
+        <div class='card-body'>
+            <dl class="row">
+                <dt class="col-sm-3 text-right">Marca:</dt>
+                <dd class="col-sm-9">{{selectedAutomobile.marca}}</dd>
+            </dl>
+
+            <dl class="row">
+                <dt class="col-sm-3 text-right">Modello:</dt>
+                <dd class="col-sm-9">{{selectedAutomobile.modello}}</dd>
+            </dl>
+
+            <dl class="row">
+                <dt class="col-sm-3 text-right">Data di Immatricolazione:</dt>
+                <dd class="col-sm-9">{{selectedAutomobile.dataImmatricolazione | date:'dd/MM/yyyy'}}</dd>
+            </dl>
+
+            <dl class="row">
+                <dt class="col-sm-3 text-right">Targa:</dt>
+                <dd class="col-sm-9">{{selectedAutomobile.targa}}</dd>
+            </dl>
+
+            <dl class="row">
+                <dt class="col-sm-3 text-right">In produzione:</dt>
+                <dd class="col-sm-9">{{selectedAutomobile.inProduzione?'SI':'NO'}}</dd>
+            </dl>
+
+        </div>
+
+        <div class='card-footer'>
+            <button type="button" id="conferma" class="btn btn-outline-primary mr-2" data-toggle="modal"
+                data-target="#confirmDeleteModal">Elimina</button>
+
+            <a routerLink="/automobile/search" [queryParams]="{_backFromSubFunction_: true}"
+                class='btn btn-outline-secondary' style='width:80px'>
+                <i class='fa fa-chevron-left'></i> Back
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmDeleteModalLabel">Conferma eliminazione</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Continuare con eliminizaione dell'elemento selezionato?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
+                <button type="button" (click)='delete(selectedAutomobile)' data-dismiss="modal" class="btn btn-primary">Continua</button>
+            </div>
+        </div>
+    </div>
+</div>

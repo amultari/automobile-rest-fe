@@ -50,11 +50,11 @@ export class AutomobileService {
     );
   }
 
-  // delete(autoreInput: Autore): Observable<Autore> {
-  //   return this.http.delete<Autore>(this.apiServer + '/' + autoreInput.id.toString(), this.httpOptions).pipe(
-  //     catchError(this.handleError)
-  //   );
-  // }
+  delete(automobileInput: Automobile): Observable<Automobile> {
+    return this.http.delete<Automobile>(this.apiServer + '/' + automobileInput.id.toString(), this.httpOptions).pipe(
+      catchError(this.handleError)
+    );
+  }
 
   private handleError(err: HttpErrorResponse) {
     // in a real world app, we may send the server to some remote logging infrastructure

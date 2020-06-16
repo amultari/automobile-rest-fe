@@ -8,6 +8,7 @@ import { LoginComponent } from './login/login.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { AutomobileDetailComponent } from './automobile/automobile-detail/automobile-detail.component';
 import { AutomobileEditComponent } from './automobile/automobile-edit/automobile-edit.component';
+import { AutomobileDeleteComponent } from './automobile/automobile-delete/automobile-delete.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'welcome', pathMatch: 'full', canActivate: [AuthGuard] },
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'automobile/create', component: AutomobileCreateComponent, canActivate: [AuthGuard]  },
   { path: 'automobile/:id', component: AutomobileDetailComponent, canActivate: [AuthGuard] },
   { path: 'automobile/edit/:id', component: AutomobileEditComponent, canActivate: [AuthGuard] },
+  { path: 'automobile/delete/:id', component: AutomobileDeleteComponent, canActivate: [AuthGuard] },
   { path: '**', redirectTo: 'welcome', pathMatch: 'full' },
 ];
 

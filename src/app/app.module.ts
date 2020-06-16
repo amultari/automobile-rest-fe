@@ -16,6 +16,7 @@ import { AutomobileCreateComponent } from './automobile/automobile-create/automo
 import { AutomobileDetailComponent } from './automobile/automobile-detail/automobile-detail.component';
 import { AutomobileEditComponent } from './automobile/automobile-edit/automobile-edit.component';
 import { DatePipe } from '@angular/common';
+import { AutomobileDeleteComponent } from './automobile/automobile-delete/automobile-delete.component';
 
 
 
@@ -30,7 +31,8 @@ import { DatePipe } from '@angular/common';
     AutomobileSearchResultsComponent,
     AutomobileCreateComponent,
     AutomobileDetailComponent,
-    AutomobileEditComponent
+    AutomobileEditComponent,
+    AutomobileDeleteComponent
   ],
   imports: [
     BrowserModule,
