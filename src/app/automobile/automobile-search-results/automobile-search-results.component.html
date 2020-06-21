@@ -1,0 +1,42 @@
+<div class="container" *ngIf="searchResultInput && searchResultInput.length > 0">
+
+    <div class='card'>
+        <div class='card-body'>
+
+            <div class='table-responsive'>
+                <table class='table table-striped '>
+                    <thead>
+                        <tr>
+                            <th>Marca</th>
+                            <th>Modello</th>
+                            <th>Data di Immatricolazione</th>
+                            <th>Targa</th>
+                            <th>In produzione</th>
+                            <th>Azioni</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let automobileItem of searchResultInput | paginate: { itemsPerPage: itemsPerPageInput, currentPage: currentPageInput, totalItems: searchResultInputCount }">
+                            <td>{{automobileItem.marca}}</td>
+                            <td>{{automobileItem.modello}}</td>
+                            <td>{{automobileItem.dataImmatricolazione | date:'dd/MM/yyyy'}}</td>
+                            <td>{{automobileItem.targa}}</td>
+                            <td>{{automobileItem.inProduzione?'SI':'NO'}}</td>
+                            <td>
+                                <a class="btn  btn-sm btn-outline-secondary"
+                                    [routerLink]="['/automobile', automobileItem.id]">Visualizza</a>
+                                <a class="btn  btn-sm btn-outline-primary ml-2 mr-2"
+                                    [routerLink]="['/automobile/edit', automobileItem.id]">Edit</a>
+                                <a class="btn btn-outline-danger btn-sm"
+                                    [routerLink]="['/automobile/delete', automobileItem.id]">Delete</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+            </div>
+
+            <!-- end card-body -->
+        </div>
+    </div>
+</div>

@@ -1,0 +1,92 @@
+<div class="container">
+    <div *ngIf="errorMessage" class="alert alert-danger alert-dismissible fade show mt-5" role="alert">
+        {{errorMessage}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+    <div *ngIf="confirmMessage" class="alert alert-success alert-dismissible fade show" role="alert">
+        {{confirmMessage}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+    <div class='card'>
+        <div class='card-header'>
+            <h5>Ricerca Elementi</h5>
+        </div>
+        <div class='card-body'>
+
+            <form (ngSubmit)="search(automobileSearchForm)" #automobileSearchForm="ngForm" novalidate>
+
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label>Marca </label>
+                        <input type="text" class="form-control" placeholder="Inserire la marca"  id="marca"
+                            name="marca" [(ngModel)]="automobileSearch.marca">
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label>Modello </label>
+                        <input type="text" id="modello" class="form-control" placeholder="Inserire il modello"
+                           name="modello" [(ngModel)]="automobileSearch.modello">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Data immatricolazione</label>
+                        <input class="form-control" id="dataImmatricolazione" type="date" placeholder="dd/MM/yy"
+                            title="formato : gg/mm/aaaa" name="dataImmatricolazione" [(ngModel)]="automobileSearch.dataImmatricolazione">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label>Targa </label>
+                        <input type="text" id="targa" class="form-control" placeholder="Inserire la targa"
+                           name="targa" [(ngModel)]="automobileSearch.targa">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <p>In Produzione :</p>
+                        <div class="form-check-inline ml-1">
+                            <input class="form-check-input" type="radio" id="inProduzioneTrueId" [value]="true"
+                                name="inProduzione" [(ngModel)]="automobileSearch.inProduzione">
+                            <label class="form-check-label" for="inProduzioneTrueId">
+                                SI
+                            </label>
+                        </div>
+                        <div class="form-check-inline">
+                            <input class="form-check-input" type="radio" id="inProduzioneFalseId" [value]="false"
+                                name="inProduzione" [(ngModel)]="automobileSearch.inProduzione">
+                            <label class="form-check-label" for="inProduzioneFalseId">
+                                NO
+                            </label>
+                        </div>
+                        <div class="form-check-inline">
+                            <input class="form-check-input" type="radio" id="inProduzioneFalseAndTrueId" [value]="null"
+                                name="inProduzioneFalseAndTrueId" [(ngModel)]="automobileSearch.inProduzione">
+                            <label class="form-check-label" for="inProduzioneFalseAndTrueId">
+                                Entrambi
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <button type="submit" class="btn btn-primary">Ricerca</button>
+                <button type="button" (click)="resetForm()" class="btn btn-secondary ml-2">Ripulisci Form</button>
+                <button type="button" (click)="resetResults()" class="btn btn-secondary ml-2">Ripulisci
+                    Risultati</button>
+                <a class="btn btn-outline-primary ml-2" [routerLink]="['/automobile/create']">Add New</a>
+
+
+            </form>
+
+
+            <!-- end card-body -->
+        </div>
+    </div>
+</div>
+<app-automobile-search-results [searchResultInput]="searchResults" [searchResultInputCount]="totalCount"
+    [currentPageInput]="currentPage + 1" [itemsPerPageInput]="getMaxPerPage()" (nextPage)="nextPage($event)"></app-automobile-search-results>

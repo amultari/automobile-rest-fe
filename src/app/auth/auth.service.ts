@@ -11,66 +11,44 @@ export class AuthService {
 
   loginEndpoint: string = 'http://localhost:8080/public/login';
   headers = new HttpHeaders().set('Content-Type', 'application/json');
-  currentUser = {};
+
+  //questi mi servono per notificare agli altri component la presenza o meno dello user
+  //poteva bastare solo la versione Observable ma sono presenti tutti e due in quanto
+  //in alcuni punti (es. nell'auth.guard) potrebbe servire il valore corrente dello user
+  //e l'observable non permette di farlo mentre il Subject si on il .value
+  private userSubject: BehaviorSubject<User>;
+  public currentUser: Observable<User>;
 
   constructor(private http: HttpClient, private router: Router) {
+    this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user')));
+    this.currentUser = this.userSubject.asObservable();
   }
 
-  //questo campo mi serve per tenere aggiornati navbar e footer, per farli apparire o meno
-  private loggedInSub = new BehaviorSubject<boolean>(false);
-
-  get isLoggedInSub(): Observable<boolean> {
-    this.loggedInSub.next(this.isLoggedIn);
-    return this.loggedInSub.asObservable();
+  public get userValue(): User {
+    return this.userSubject.value;
   }
-
-  // Sign-up
-  // signUp(user: User): Observable<any> {
-  //   let api = `${this.endpoint}/register-user`;
-  //   return this.http.post(api, user)
-  //     .pipe(
-  //       catchError(this.handleError)
-  //     )
-  // }
 
   // Sign-in
   signIn(user: User) {
-    return this.http.post<any>(`${this.loginEndpoint}`, user)
+    return this.http.post<any>(`${this.loginEndpoint}`, user, { headers: this.headers })
       .subscribe((res: any) => {
-        localStorage.setItem('access_token', res.accessToken);
         this.currentUser = res;
-        this.loggedInSub.next(this.isLoggedIn);
+        localStorage.setItem('user', JSON.stringify(this.currentUser));
+        this.userSubject.next(res);
         this.router.navigate(['']);
       });
   }
 
-  getToken() {
-    return localStorage.getItem('access_token');
-  }
-
   get isLoggedIn(): boolean {
-    let authToken = localStorage.getItem('access_token');
+    let authToken = localStorage.getItem('user');
     return (authToken !== null) ? true : false;
   }
 
   doLogout() {
-    let removeToken = localStorage.removeItem('access_token');
-    this.loggedInSub.next(this.isLoggedIn);
-    if (removeToken == null) {
-      this.router.navigate(['log-in']);
-    }
+    localStorage.removeItem('user');
+    this.userSubject.next(null);
+    this.router.navigate(['log-in']);
   }
-
-  // // User profile
-  // getUserProfile(id): Observable<any> {
-  //   let api = `${this.loginEndpoint}/user-profile/${id}`;
-  //   return this.http.get(api, { headers: this.headers }).pipe(
-  //     map((res: Response) => {
-  //       return res || {}
-  //     }),
-  //     catchError(this.handleError)
-  //   )
-  // }
 
   // Error 
   handleError(error: HttpErrorResponse) {
