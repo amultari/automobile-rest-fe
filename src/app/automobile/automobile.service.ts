@@ -9,7 +9,7 @@ import { Automobile } from './automobile';
 })
 export class AutomobileService {
 
-  private apiServer = 'http://localhost:8080/api/automobile';
+  apiServer = 'http://localhost:8080/api/automobile';
   private httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'

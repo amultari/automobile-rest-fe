@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../auth/auth.service';
 import { NgForm } from '@angular/forms';
-import { User } from '../auth/user';
-import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
+import { AuthService } from '../auth/auth.service';
+import { User } from '../auth/user';
 
 @Component({
   selector: 'app-login',
@@ -16,13 +16,12 @@ export class LoginComponent implements OnInit {
 
   //questo campo mi serve per gestire la comparsa/scomparsa dei componenti nel caso sia già
   //loggato e tenti di accedere alla pagina di login
-  isLoggedIn$: Observable<boolean>;
+  currentUser$: Observable<User>;
 
-  constructor(private authService: AuthService,private route: ActivatedRoute) { }
+  constructor(private authService: AuthService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.isLoggedIn$ = this.authService.isLoggedInSub;
-
+    this.currentUser$ = this.authService.currentUser;
 
     //verifico presenza messaggio nei query params
     this.route

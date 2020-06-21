@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary" ></nav>
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary" style="height: 55px;" *ngIf="currentUser$ || !(currentUser$ | async)"></nav>
 
 <div *ngIf="errorMessage" class="alert alert-danger alert-dismissible fade show" role="alert">
     {{errorMessage}}
@@ -7,7 +7,7 @@
     </button>
 </div>
 
-<div class="auth-wrapper" *ngIf="!(isLoggedIn$ | async); else elseBlock">
+<div class="auth-wrapper" *ngIf="currentUser$ || !(currentUser$ | async); else elseBlock">
     <form class="form-signin" (ngSubmit)="loginUser(loginForm)" #loginForm="ngForm" novalidate>
         <h3 class="h3 mb-3 font-weight-normal text-center">Please sign in</h3>
         <div class="form-group">

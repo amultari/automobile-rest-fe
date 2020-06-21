@@ -1,4 +1,9 @@
-
+<div *ngIf="errorMessage" class="alert alert-danger alert-dismissible fade show" role="alert">
+   {{errorMessage}} 
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
 <!-- Main jumbotron for a primary marketing message or call to action -->
 <div class="jumbotron">
     <div class="container">
@@ -14,17 +19,12 @@
 <div class="container">
     <!-- Example row of columns -->
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-6">
             <h2>Funzione di Ricerca</h2>
             <p>Questa funzionalità permette di ricercare elementi presenti nella base dati. </p>
             <p><a class="btn btn-secondary" routerLink="/automobile/search" role="button">Vai alla funzionalità &raquo;</a></p>
         </div>
-        <div class="col-md-4">
-            <h2>Elenco elementi</h2>
-            <p>Questa funzionalità espone una lista iniziale di elementi. </p>
-            <p><a class="btn btn-secondary" routerLink="/automobile" role="button">Vai alla funzionalità &raquo;</a></p>
-        </div>
-        <div class="col-md-4">
+        <div class="col-md-6">
             <h2>Inserisci nuovo elemento</h2>
             <p>Questa funzionalità permette di inserire un nuovo elemento nella base dati.</p>
             <p><a class="btn btn-secondary" routerLink="/automobile/create" role="button">Vai alla funzionalità &raquo;</a></p>
